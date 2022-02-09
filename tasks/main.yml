@@ -1,0 +1,55 @@
+---
+
+- name: Fail if not macOS
+  fail:
+    msg: Must be running macOS
+  when:
+    - ansible_os_family != 'Darwin'
+
+- name: Register Homebrew install state
+  stat:
+    path: /usr/local/bin/brew
+  register: homebrew_brew
+
+- name: Fail if Homebrew is not installed
+  fail:
+    msg: No Homebrew at `/usr/local/bin/brew`
+  when:
+    - not homebrew_brew.stat.exists
+
+- name: Install zsh
+  become: false
+  homebrew: name={{item}} state=latest
+  with_items:
+    - zsh
+  when:
+    - false  # Added to speed up testing only - remove before commit
+    - homebrew_brew.stat.exists
+
+- name: Register custom source zshrc
+  stat:
+    path: /Volumes/Shuroo/zsh/.zshrc
+  register: source_zshrc
+
+- name: Register default source zshrc
+  stat:
+    path: ~/.shurroo/roles/zsh/files/.zshrc
+  register: source_zshrc
+  when:
+    - not source_zshrc.stat.exists
+
+- name: Register target zshrc
+  stat:
+    path: ~/.zshrc
+  register: target_zshrc
+
+- name: Copy source zshrc
+  become: false
+  copy:
+    src: /Volumes/Shuroo/.zshrc.zsh
+    dest: ~/.zshrc
+  when:
+    - source_zshrc.stat.exists
+    - not target_zshrc.stat.exists
+
+...
