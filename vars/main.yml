@@ -1,6 +1,5 @@
 ---
 
-vars:
-  overwrite_zshrc: false
+# No vars for zsh role
 
 ...
