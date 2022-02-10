@@ -44,7 +44,7 @@
 - name: Copy custom source zshrc
   become: false
   copy:
-    src: /Volumes/Shuroo/.zshrc.zsh
+    src: /Volumes/Shuroo/zsh/.zshrc
     dest: ~/.zshrc
   when: custom_source_zshrc.stat.exists and 
         (not target_zshrc.stat.exists or overwrite_zshrc)
