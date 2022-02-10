@@ -1,2 +1,6 @@
 ---
-# vars file for zsh
+
+vars:
+  overwrite_zshrc: false
+
+...

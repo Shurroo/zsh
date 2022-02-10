@@ -29,27 +29,33 @@
 - name: Register custom source zshrc
   stat:
     path: /Volumes/Shuroo/zsh/.zshrc
-  register: source_zshrc
+  register: custom_source_zshrc
 
 - name: Register default source zshrc
   stat:
     path: ~/.shurroo/roles/zsh/files/.zshrc
-  register: source_zshrc
-  when:
-    - not source_zshrc.stat.exists
+  register: default_source_zshrc
 
 - name: Register target zshrc
   stat:
     path: ~/.zshrc
   register: target_zshrc
 
-- name: Copy source zshrc
+- name: Copy custom source zshrc
   become: false
   copy:
     src: /Volumes/Shuroo/.zshrc.zsh
     dest: ~/.zshrc
-  when:
-    - source_zshrc.stat.exists
-    - not target_zshrc.stat.exists
+  when: custom_source_zshrc.stat.exists and 
+        (not target_zshrc.stat.exists or overwrite_zshrc)
+  register: copy_custom_result
+
+- name: Copy default source zshrc
+  become: false
+  copy:
+    src: ~/.shurroo/roles/zsh/files/.zshrc
+    dest: ~/.zshrc
+  when: not copy_custom_result is succeeded and default_source_zshrc.stat.exists and 
+        (not target_zshrc.stat.exists or overwrite_zshrc)
 
 ...
