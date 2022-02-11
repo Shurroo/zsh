@@ -28,7 +28,7 @@
 
 - name: Register custom source zshrc
   stat:
-    path: /Volumes/Shuroo/zsh/.zshrc
+    path: /Volumes/Shurroo/zsh/.zshrc
   register: custom_source_zshrc
 
 - name: Register default source zshrc
@@ -41,10 +41,35 @@
     path: ~/.zshrc
   register: target_zshrc
 
+- name: Print custom source status
+  ansible.builtin.debug:
+    var: custom_source_zshrc.stat.exists
+    verbosity: 2
+
+- name: Print default source status
+  ansible.builtin.debug:
+    var: default_source_zshrc.stat.exists
+    verbosity: 2
+
+- name: Print target status
+  ansible.builtin.debug:
+    var: target_zshrc.stat.exists
+    verbosity: 2
+
+- name: Print overwrite status
+  ansible.builtin.debug:
+    var: overwrite_zshrc
+    verbosity: 2
+
+- name: Print (not target or overwrite) status
+  ansible.builtin.debug:
+    var: (not target_zshrc.stat.exists or overwrite_zshrc)
+    verbosity: 2
+
 - name: Copy custom source zshrc
   become: false
   copy:
-    src: /Volumes/Shuroo/zsh/.zshrc
+    src: /Volumes/Shurroo/zsh/.zshrc
     dest: ~/.zshrc
   when: custom_source_zshrc.stat.exists and 
         (not target_zshrc.stat.exists or overwrite_zshrc)
