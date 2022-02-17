@@ -1,7 +1,2 @@
 *.DS_Store
-*.pyc
-*.python-version
 .idea
-.ipynb_checkpoints
-*.back
-venv

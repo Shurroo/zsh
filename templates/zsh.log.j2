@@ -1,0 +1,11 @@
+custom zshrc file = {{ custom_source_zshrc.stat.exists }}
+default zshrc file = {{ default_source_zshrc.stat.exists }}
+target zshrc file = {{ target_zshrc.stat.exists }}
+overwrite zshrc = {{ overwrite_zshrc }}
+{% if user_name is defined %}
+user name = {{ user_name }}
+default shell = {{ zsh_result.stdout }}
+{% else %}
+user name = undefined
+default shell = not changed
+{% endif %}

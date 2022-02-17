@@ -19,12 +19,20 @@
 
 - name: Install zsh
   become: false
-  homebrew: name={{item}} state=latest
-  with_items:
-    - zsh
-  when:
-    - false  # Added to speed up testing only - remove before commit
-    - homebrew_brew.stat.exists
+  homebrew: name=zsh state=latest
+
+- name: Register Zsh executable path
+  shell: command -v zsh
+  register: zsh_result
+  changed_when: false
+  failed_when: false
+
+- name: Set default shell
+  become: yes
+  user:
+    name: '{{ user_name }}'
+    shell: '{{ zsh_result.stdout }}'
+  when: user_name is defined
 
 - name: Register custom source zshrc
   stat:
@@ -82,5 +90,12 @@
     dest: ~/.zshrc
   when: not copy_custom_result is succeeded and default_source_zshrc.stat.exists and 
         (not target_zshrc.stat.exists or overwrite_zshrc)
+
+- name: Log results
+  template:
+    src: zsh.log.j2
+    dest: $HOME/.shurroo/log/zsh-{{ log_time }}.log
+  when: write_log_file
+  changed_when: false
 
 ...

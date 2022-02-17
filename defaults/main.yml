@@ -1,6 +1,8 @@
 ---
 
-# Don't overwrite ~/.zshrc if it exists
+# Don't create a log file
+write_log_file: false
+# Don't overwrite ~/.zshrc file if it exists
 overwrite_zshrc: false
 
 ...

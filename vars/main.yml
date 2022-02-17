@@ -1,5 +1,6 @@
 ---
 
-# No vars for zsh role
+# Capture current time for log file name if write_log_file is selected
+log_time: "{{ lookup('pipe', 'date +%Y-%m%d-%H%M') }}"
 
 ...
