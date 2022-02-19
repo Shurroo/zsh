@@ -1,0 +1,2 @@
+See log output using `shurroo log zsh`.
+

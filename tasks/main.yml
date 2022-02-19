@@ -98,4 +98,21 @@
   when: write_log_file
   changed_when: false
 
+- name: Register log status
+  # Set to "log_no.txt" message in vars
+  # Change to "log_yes.txt" message when write_log_file
+  set_fact: log_status="log_yes.txt"
+  when: write_log_file
+  changed_when: false
+
+- name: Register next steps
+  # Set to "ready_no.txt" message in vars
+  # Change to "ready_yes.txt" message when all conditions are met
+  set_fact: next_steps="ready_yes.txt"
+  when: user_name is defined
+
+- name: Next steps
+  debug:
+    msg: "{{ lookup('file', log_status, rstrip=false) }}{{ lookup('file', next_steps, rstrip=false) }}"
+
 ...

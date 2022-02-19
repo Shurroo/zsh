@@ -1,0 +1,3 @@
+Your default shell has not been changed.
+When you have completed this change, you should
+log out and back in again for this to take effect.

@@ -5,7 +5,11 @@ overwrite zshrc = {{ overwrite_zshrc }}
 {% if user_name is defined %}
 user name = {{ user_name }}
 default shell = {{ zsh_result.stdout }}
+Your default shell has been changed, and you should now
 {% else %}
 user name = undefined
 default shell = not changed
+Your default shell has not been changed.
+When you have completed this change, you should
 {% endif %}
+log out and back in again for this to take effect.

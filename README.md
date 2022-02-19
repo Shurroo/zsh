@@ -50,9 +50,9 @@ Example Playbook
   roles:
     - role: Shurroo.zsh
   vars:
-    user_name: Groot
-    overwrite_zshrc: true
     write_log_file: true
+    overwrite_zshrc: true
+    user_name: Groot
 ```
 
 Source Files
@@ -74,7 +74,7 @@ For the file to be copied, one of the following must be true:
 Project Name
 ------------
 
-The project was originally inspired from the [Superlumic](https://github.com/superlumic/superlumic) project by [Roderik van der Veer](https://github.com/roderik). When I started on a replacement, I searched for a name with some meaning like "launch", "fire up", "bootstrap" or similar. I eventually settled on Hindi "shurroo" (शुरू). [Google Translate](https://translate.google.com/?sl=en&tl=hi&text=begin&op=translate) tells me "shurroo" means "begin", so this works nicely. Note that the official latin spelling has only one "r", but that name was already taken on GitHub, so I added a second "r"! See the parent [Shurroo](https://github.com/Shurroo/shurroo) project for more details.
+The project was originally inspired from the [Superlumic](https://github.com/superlumic/superlumic) project by [Roderik van der Veer](https://github.com/roderik). When I started on a replacement, I searched for a name with some meaning like "launch", "fire up", "bootstrap" or similar. I eventually settled on Hindi "shurroo" (शुरू). [Google Translate](https://translate.google.com/?sl=en&tl=hi&text=begin&op=translate) tells me "shurroo" means "begin", so this works nicely. Note that the official latin spelling has only one "r", but that name was already taken on GitHub, so I added a second "r". See the parent [Shurroo](https://github.com/Shurroo/shurroo) project for more details.
 
 License
 -------

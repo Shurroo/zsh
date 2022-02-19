@@ -1,0 +1,2 @@
+Your default shell has been changed, and you should now
+log out and back in again for this to take effect.

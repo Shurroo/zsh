@@ -1,6 +1,12 @@
 ---
 
-# Capture current time for log file name if write_log_file is selected
+# Capture the current time for the log file name if write_log_file is selected
 log_time: "{{ lookup('pipe', 'date +%Y-%m%d-%H%M') }}"
+# Default to the "log_no.txt" version of the log status message
+# If write_log_file is selected, set this to the "log_yes.txt" version of the log status message in tasks
+log_status: log_no.txt
+# Default to the "not_ready.txt" version of the next steps message
+# If we fulfill all the conditions, set this to the "ready.txt" version of the next steps message in tasks
+next_steps: ready_no.txt
 
 ...
